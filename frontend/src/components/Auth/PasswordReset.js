@@ -1,27 +1,31 @@
-import React, { useState, useContext } from 'react';
-import { AuthContext } from '../../contexts/AuthContext';
+import React, { useState } from 'react';
+import { resetPassword } from '../../services/authService';
 
 const PasswordReset = () => {
-  const { resetPassword } = useContext(AuthContext);
   const [email, setEmail] = useState('');
+  const [resetSent, setResetSent] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleReset = async (e) => {
     e.preventDefault();
-    resetPassword(email);
+    try {
+      await resetPassword(email);
+      setResetSent(true);
+    } catch (error) {
+      console.error('Password reset failed', error);
+      // Handle password reset failure (e.g., show error message)
+    }
   };
 
   return (
     <div>
-      <h2>Password Reset</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <button type="submit">Reset Password</button>
-      </form>
+      {resetSent ? (
+        <p>Password reset email sent. Check your inbox.</p>
+      ) : (
+        <form onSubmit={handleReset}>
+          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
+          <button type="submit">Reset Password</button>
+        </form>
+      )}
     </div>
   );
 };

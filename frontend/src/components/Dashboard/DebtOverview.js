@@ -1,19 +1,18 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { DebtContext } from '../../contexts/DebtContext';
+import DebtListView from './DebtListView';
 
 const DebtOverview = () => {
-  const { debts } = useContext(DebtContext);
+  const { debts, fetchDebts } = useContext(DebtContext);
+
+  useEffect(() => {
+    fetchDebts();
+  }, [fetchDebts]);
 
   return (
     <div>
-      <h3>Debt Overview</h3>
-      <ul>
-        {debts.map((debt) => (
-          <li key={debt.id}>
-            {debt.creditor}: ${debt.balance} @ {debt.interestRate}%
-          </li>
-        ))}
-      </ul>
+      <h2>Debt Overview</h2>
+      <DebtListView debts={debts} />
     </div>
   );
 };

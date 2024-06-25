@@ -1,15 +1,18 @@
 import React from 'react';
 
-const DebtDetailView = ({ debt }) => {
+const DebtDetailView = ({ debt, onDelete }) => {
+  const { creditor, balance, interestRate, minimumPayment } = debt;
+
   return (
     <div>
-      <h3>Debt Details</h3>
-      <p>Creditor: {debt.creditor}</p>
-      <p>Balance: ${debt.balance}</p>
-      <p>Interest Rate: {debt.interestRate}%</p>
-      <p>Minimum Payment: ${debt.minimumPayment}</p>
+      <h4>{creditor}</h4>
+      <p>Balance: ${balance}</p>
+      <p>Interest Rate: {interestRate}%</p>
+      <p>Minimum Payment: ${minimumPayment}</p>
+      <button onClick={() => onDelete(debt._id)}>Delete</button>
     </div>
   );
 };
 
 export default DebtDetailView;
+
