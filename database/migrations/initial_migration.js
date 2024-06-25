@@ -1,0 +1,32 @@
+const mongoose = require('mongoose');
+const config = require('../config/config');
+
+const connectDB = async () => {
+  try {
+    await mongoose.connect(config.mongoURI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log('MongoDB connected...');
+  } catch (err) {
+    console.error(err.message);
+    process.exit(1);
+  }
+};
+
+const runMigrations = async () => {
+  try {
+    await connectDB();
+
+    // Optionally, drop the database for a clean slate (use with caution)
+    // await mongoose.connection.dropDatabase();
+
+    console.log('Database schema created...');
+    process.exit(0);
+  } catch (err) {
+    console.error(err.message);
+    process.exit(1);
+  }
+};
+
+runMigrations();
