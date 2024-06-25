@@ -1,35 +1,28 @@
-import React, { useState, useContext } from 'react';
-import { PaymentContext } from '../../contexts/PaymentContext';
+import React, { useState } from 'react';
+import { setupAutomatedPayments } from '../../services/paymentService';
 
 const PaymentSetup = () => {
-  const { setupPayment } = useContext(PaymentContext);
-  const [account, setAccount] = useState('');
   const [amount, setAmount] = useState('');
+  const [frequency, setFrequency] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSetup = async (e) => {
     e.preventDefault();
-    setupPayment({ account, amount });
-    setAccount('');
-    setAmount('');
+    try {
+      await setupAutomatedPayments({ amount, frequency });
+      // Optionally, reset form fields or show success message
+    } catch (error) {
+      console.error('Failed to set up automated payments', error);
+      // Handle error (e.g., show error message)
+    }
   };
 
   return (
     <div>
-      <h3>Setup Automated Payment</h3>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Account"
-          value={account}
-          onChange={(e) => setAccount(e.target.value)}
-        />
-        <input
-          type="number"
-          placeholder="Amount"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-        />
-        <button type="submit">Setup Payment</button>
+      <h2>Setup Automated Payments</h2>
+      <form onSubmit={handleSetup}>
+        <input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="Amount" />
+        <input type="text" value={frequency} onChange={(e) => setFrequency(e.target.value)} placeholder="Frequency" />
+        <button type="submit">Setup</button>
       </form>
     </div>
   );

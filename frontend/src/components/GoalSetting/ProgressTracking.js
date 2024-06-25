@@ -1,17 +1,39 @@
-import React, { useContext, useEffect } from 'react';
-import { GoalContext } from '../../contexts/GoalContext';
+import React, { useEffect, useState } from 'react';
+import { getGoals } from '../../services/goalService';
 
 const ProgressTracking = () => {
-  const { goals, fetchGoals } = useContext(GoalContext);
+  const [goals, setGoals] = useState([]);
 
   useEffect(() => {
+    const fetchGoals = async () => {
+      try {
+        const goalData = await getGoals();
+        setGoals(goalData);
+      } catch (error) {
+        console.error('Failed to fetch goals', error);
+      }
+    };
+
     fetchGoals();
-  }, [fetchGoals]);
+  }, []);
 
   return (
     <div>
-      <h3>Progress Tracking</h3>
-      <ul>
-        {goals.map((goal) => (
-          <li key={goal.id}>
-            {goal.name}: ${goal.savedAmount} / ${goal.targetAmount}
+      <h2>Progress Tracking</h2>
+      {goals.length > 0 ? (
+        goals.map((goal, index) => (
+          <div key={index}>
+            <p>Goal: {goal.goal}</p>
+            <p>Amount: ${goal.amount}</p>
+            <p>Target Date: {goal.targetDate}</p>
+            <p>Progress: {goal.progress}%</p>
+          </div>
+        ))
+      ) : (
+        <p>No goals available</p>
+      )}
+    </div>
+  );
+};
+
+export default ProgressTracking;

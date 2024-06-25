@@ -1,42 +1,29 @@
-import React, { useState, useContext } from 'react';
-import { GoalContext } from '../../contexts/GoalContext';
+import React, { useState } from 'react';
+import { createGoal } from '../../services/goalService';
 
 const GoalCreation = () => {
-  const { createGoal } = useContext(GoalContext);
-  const [goalName, setGoalName] = useState('');
+  const [goal, setGoal] = useState('');
   const [amount, setAmount] = useState('');
-  const [dueDate, setDueDate] = useState('');
+  const [targetDate, setTargetDate] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleCreateGoal = async (e) => {
     e.preventDefault();
-    createGoal({ goalName, amount, dueDate });
-    setGoalName('');
-    setAmount('');
-    setDueDate('');
+    try {
+      await createGoal({ goal, amount, targetDate });
+      // Optionally, reset form fields or show success message
+    } catch (error) {
+      console.error('Failed to create goal', error);
+      // Handle error (e.g., show error message)
+    }
   };
 
   return (
     <div>
-      <h3>Create Goal</h3>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Goal Name"
-          value={goalName}
-          onChange={(e) => setGoalName(e.target.value)}
-        />
-        <input
-          type="number"
-          placeholder="Amount"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-        />
-        <input
-          type="date"
-          placeholder="Due Date"
-          value={dueDate}
-          onChange={(e) => setDueDate(e.target.value)}
-        />
+      <h2>Create New Goal</h2>
+      <form onSubmit={handleCreateGoal}>
+        <input type="text" value={goal} onChange={(e) => setGoal(e.target.value)} placeholder="Goal" />
+        <input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="Amount" />
+        <input type="date" value={targetDate} onChange={(e) => setTargetDate(e.target.value)} placeholder="Target Date" />
         <button type="submit">Create Goal</button>
       </form>
     </div>

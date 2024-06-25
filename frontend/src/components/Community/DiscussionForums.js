@@ -1,11 +1,36 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { getForumThreads } from '../../services/communityService';
 
 const DiscussionForums = () => {
-  // Component logic for fetching and displaying discussion forum threads
+  const [threads, setThreads] = useState([]);
+
+  useEffect(() => {
+    const fetchThreads = async () => {
+      try {
+        const threadData = await getForumThreads();
+        setThreads(threadData);
+      } catch (error) {
+        console.error('Failed to fetch threads', error);
+      }
+    };
+
+    fetchThreads();
+  }, []);
+
   return (
     <div>
-      <h3>Discussion Forums</h3>
-      {/* Display discussion forum threads */}
+      <h2>Discussion Forums</h2>
+      {threads.length > 0 ? (
+        threads.map((thread, index) => (
+          <div key={index}>
+            <p>Title: {thread.title}</p>
+            <p>Started by: {thread.author}</p>
+            <p>Date: {thread.date}</p>
+          </div>
+        ))
+      ) : (
+        <p>No threads available</p>
+      )}
     </div>
   );
 };

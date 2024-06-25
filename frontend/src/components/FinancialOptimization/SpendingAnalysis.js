@@ -1,23 +1,33 @@
 import React, { useEffect, useState } from 'react';
+import { getSpendingAnalysis } from '../../services/financialService';
 
 const SpendingAnalysis = () => {
-  const [spendingData, setSpendingData] = useState([]);
+  const [analysis, setAnalysis] = useState(null);
 
   useEffect(() => {
-    // Fetch spending analysis data
-    fetch('/api/financial/spending-analysis')
-      .then(response => response.json())
-      .then(data => setSpendingData(data));
+    const fetchAnalysis = async () => {
+      try {
+        const spendingData = await getSpendingAnalysis();
+        setAnalysis(spendingData);
+      } catch (error) {
+        console.error('Failed to fetch spending analysis', error);
+      }
+    };
+
+    fetchAnalysis();
   }, []);
 
   return (
     <div>
-      <h3>Spending Analysis</h3>
-      <ul>
-        {spendingData.map((item, index) => (
-          <li key={index}>{item.category}: ${item.amount}</li>
-        ))}
-      </ul>
+      <h2>Spending Analysis</h2>
+      {analysis ? (
+        <div>
+          {/* Render spending analysis data */}
+          <p>{analysis}</p>
+        </div>
+      ) : (
+        <p>Loading...</p>
+      )}
     </div>
   );
 };

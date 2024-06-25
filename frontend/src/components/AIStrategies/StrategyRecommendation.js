@@ -1,25 +1,34 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { DebtContext } from '../../contexts/DebtContext';
+import { getStrategyRecommendations } from '../../services/aiService';
 
 const StrategyRecommendation = () => {
   const { debts } = useContext(DebtContext);
-  const [strategy, setStrategy] = useState('');
+  const [recommendation, setRecommendation] = useState(null);
 
   useEffect(() => {
-    // Call the AI service to get the strategy recommendation
-    fetch('/api/ai/strategy', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ debts }),
-    })
-      .then(response => response.json())
-      .then(data => setStrategy(data.recommendation));
+    const fetchRecommendation = async () => {
+      try {
+        const strategy = await getStrategyRecommendations(debts);
+        setRecommendation(strategy);
+      } catch (error) {
+        console.error('Failed to fetch strategy recommendation', error);
+      }
+    };
+
+    fetchRecommendation();
   }, [debts]);
 
   return (
     <div>
-      <h3>Strategy Recommendation</h3>
-      <p>{strategy}</p>
+      <h2>Recommended Strategy</h2>
+      {recommendation ? (
+        <div>
+          <p>{recommendation}</p>
+        </div>
+      ) : (
+        <p>Loading...</p>
+      )}
     </div>
   );
 };
