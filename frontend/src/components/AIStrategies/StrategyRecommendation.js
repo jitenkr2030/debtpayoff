@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { DebtContext } from '../../contexts/DebtContext';
 import { getStrategyRecommendations } from '../../services/aiService';
+import aiService from '../../services/aiService';
+
 
 const StrategyRecommendation = () => {
   const { debts } = useContext(DebtContext);
