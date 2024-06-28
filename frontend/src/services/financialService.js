@@ -96,3 +96,7 @@ export const getRecordsByDateRange = (startDate, endDate) => {
     return recordDate >= startDate && recordDate <= endDate;
   });
 };
+
+export const getBillAnalysis = () => {
+    // Function logic here
+  };

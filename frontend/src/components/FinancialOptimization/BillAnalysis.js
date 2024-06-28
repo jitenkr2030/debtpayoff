@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getBillAnalysis } from '../../services/financialService';
+import { getBillAnalysis } from '../../services/financialService';
 
 const BillAnalysis = () => {
   const [analysis, setAnalysis] = useState(null);
