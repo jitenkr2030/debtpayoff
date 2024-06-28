@@ -13,7 +13,7 @@ RUN npm install
 # Copy local code to the container image.
 COPY . .
 
-# Build the app
+# Build the app.
 RUN npm run build
 
 # Run the web service on container startup.
