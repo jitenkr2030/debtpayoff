@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { setCustomAlerts } from '../../services/notificationService';
+import { sendNotification } from '../../services/notificationService';
 
 const CustomAlerts = () => {
   const [alertType, setAlertType] = useState('');
