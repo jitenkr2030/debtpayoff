@@ -1,7 +1,10 @@
-// ./src/services/notificationService.js
+// src/services/notificationService.js
 
-export const sendNotification = (message) => {
-    // Placeholder function, actual implementation depends on your needs
-    console.log(`Sending notification: ${message}`);
-  };
-  
+// Function to get user notifications
+export const getNotifications = async () => {
+  // Placeholder logic for fetching notifications
+  return [
+    { id: 1, type: "alert", message: "Notification 1" },
+    { id: 2, type: "reminder", message: "Notification 2" },
+  ];
+};

@@ -1,36 +1,30 @@
+// src/components/AIStrategies/DynamicPlanAdjustment.js
+
 import React, { useEffect, useState } from 'react';
 import { getDynamicPlanAdjustments } from '../../services/aiService';
 
 const DynamicPlanAdjustment = () => {
-  const [adjustments, setAdjustments] = useState(null);
+  const [adjustments, setAdjustments] = useState([]);
 
   useEffect(() => {
-    const fetchAdjustments = async () => {
-      try {
-        const adjustmentData = await getDynamicPlanAdjustments();
-        setAdjustments(adjustmentData);
-      } catch (error) {
-        console.error('Failed to fetch dynamic plan adjustments', error);
-      }
+    const fetchData = async () => {
+      const data = await getDynamicPlanAdjustments();
+      setAdjustments(data);
     };
 
-    fetchAdjustments();
+    fetchData();
   }, []);
 
   return (
     <div>
       <h2>Dynamic Plan Adjustments</h2>
-      {adjustments ? (
-        <div>
-          {adjustments.map((adjustment, index) => (
-            <div key={index}>
-              <p>{adjustment}</p>
-            </div>
-          ))}
-        </div>
-      ) : (
-        <p>Loading...</p>
-      )}
+      <ul>
+        {adjustments.map(adjustment => (
+          <li key={adjustment.id}>
+            {adjustment.description}: ${adjustment.amount}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

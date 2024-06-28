@@ -2,12 +2,17 @@
 
 import React from 'react';
 
-const DebtListView = () => {
+const DebtListView = ({ debts }) => {
   return (
     <div>
-      {/* Placeholder content */}
-      <h2>Debt List View</h2>
-      <p>This is the placeholder content for Debt List View.</p>
+      <h2>Debt List</h2>
+      <ul>
+        {debts.map(debt => (
+          <li key={debt.id}>
+            {debt.name}: ${debt.amount}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

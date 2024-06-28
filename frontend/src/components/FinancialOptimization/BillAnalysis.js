@@ -1,37 +1,32 @@
+// src/components/FinancialOptimization/BillAnalysis.js
+
 import React, { useEffect, useState } from 'react';
-import { getBillAnalysis } from '../../services/financialService';
 import { getBillAnalysis } from '../../services/financialService';
 
 const BillAnalysis = () => {
-  const [analysis, setAnalysis] = useState(null);
+  const [bills, setBills] = useState([]);
 
   useEffect(() => {
-    const fetchAnalysis = async () => {
-      try {
-        const billData = await getBillAnalysis();
-        setAnalysis(billData);
-      } catch (error) {
-        console.error('Failed to fetch bill analysis', error);
-      }
+    const fetchData = async () => {
+      const data = await getBillAnalysis();
+      setBills(data);
     };
 
-    fetchAnalysis();
+    fetchData();
   }, []);
 
   return (
     <div>
       <h2>Bill Analysis</h2>
-      {analysis ? (
-        <div>
-          {/* Render bill analysis data */}
-          <p>{analysis}</p>
-        </div>
-      ) : (
-        <p>Loading...</p>
-      )}
+      <ul>
+        {bills.map(bill => (
+          <li key={bill.id}>
+            {bill.name}: ${bill.amount}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
 
 export default BillAnalysis;
-
