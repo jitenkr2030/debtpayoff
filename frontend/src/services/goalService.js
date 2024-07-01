@@ -1,68 +1,36 @@
-// ./src/services/goalService.js
+// src/services/goalService.js
 
-// Mock database for storing goals
-let goals = [];
-
-/**
- * Generates a unique ID for each goal.
- */
-const generateId = () => {
-  return Math.random().toString(36).substr(2, 9);
+// Function to get user goals
+export const getUserGoals = (userId) => {
+  // Example logic for the function
+  console.log(`Getting goals for user ID: ${userId}`);
+  // Return some data or perform an API call
+  return [
+    { id: 1, name: "Save for vacation", amount: 5000, progress: 1500 },
+    { id: 2, name: "Pay off credit card", amount: 2000, progress: 500 },
+  ];
 };
 
-/**
- * Creates a new goal.
- * @param {Object} goal - The goal to create.
- * @returns {Object} The created goal.
- */
-export const createGoal = (goal) => {
-  const newGoal = { id: generateId(), ...goal };
-  goals.push(newGoal);
-  return newGoal;
+// Function to add a new goal
+export const addGoal = (userId, goal) => {
+  // Example logic for the function
+  console.log(`Adding goal for user ID: ${userId}`);
+  // Perform add goal operations
+  return { success: true };
 };
 
-/**
- * Retrieves all goals.
- * @returns {Array} An array of goals.
- */
-export const getGoals = () => {
-  return goals;
+// Function to update a goal
+export const updateGoal = (userId, goalId, goalData) => {
+  // Example logic for the function
+  console.log(`Updating goal ID: ${goalId} for user ID: ${userId}`);
+  // Perform update operations
+  return { success: true };
 };
 
-/**
- * Retrieves a goal by ID.
- * @param {string} id - The ID of the goal to retrieve.
- * @returns {Object|undefined} The goal with the given ID, or undefined if not found.
- */
-export const getGoalById = (id) => {
-  return goals.find(goal => goal.id === id);
-};
-
-/**
- * Updates a goal by ID.
- * @param {string} id - The ID of the goal to update.
- * @param {Object} updates - The updates to apply to the goal.
- * @returns {Object|undefined} The updated goal, or undefined if not found.
- */
-export const updateGoal = (id, updates) => {
-  const goalIndex = goals.findIndex(goal => goal.id === id);
-  if (goalIndex === -1) {
-    return undefined;
-  }
-  goals[goalIndex] = { ...goals[goalIndex], ...updates };
-  return goals[goalIndex];
-};
-
-/**
- * Deletes a goal by ID.
- * @param {string} id - The ID of the goal to delete.
- * @returns {boolean} True if the goal was deleted, false if not found.
- */
-export const deleteGoal = (id) => {
-  const goalIndex = goals.findIndex(goal => goal.id === id);
-  if (goalIndex === -1) {
-    return false;
-  }
-  goals.splice(goalIndex, 1);
-  return true;
+// Function to delete a goal
+export const deleteGoal = (userId, goalId) => {
+  // Example logic for the function
+  console.log(`Deleting goal ID: ${goalId} for user ID: ${userId}`);
+  // Perform delete operations
+  return { success: true };
 };

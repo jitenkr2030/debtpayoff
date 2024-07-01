@@ -1,10 +1,17 @@
 // src/services/notificationService.js
 
-// Function to get user notifications
-export const getNotifications = async () => {
-  // Placeholder logic for fetching notifications
-  return [
-    { id: 1, type: "alert", message: "Notification 1" },
-    { id: 2, type: "reminder", message: "Notification 2" },
-  ];
+// Function to send a notification
+export const sendNotification = (userId, message) => {
+  // Example logic for the function
+  console.log(`Sending notification to user ID: ${userId}`);
+  // Perform notification sending operations
 };
+
+// Function to get notifications for a user
+export const getNotifications = (userId) => {
+  // Example logic for the function
+  console.log(`Getting notifications for user ID: ${userId}`);
+  // Return some data or perform an API call
+};
+
+// Export other notification service functions if needed
