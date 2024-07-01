@@ -1,27 +1,31 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { loginUser } from '../../services/authService';
+import { useAuth } from '../../hooks/useAuth';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const history = useHistory();
+  const { login } = useAuth();
 
-  const handleLogin = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      await loginUser(email, password);
-      history.push('/dashboard');
-    } catch (error) {
-      console.error('Login failed', error);
-      // Handle login failure (e.g., show error message)
-    }
+    await login(email, password);
   };
 
   return (
-    <form onSubmit={handleLogin}>
-      <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
-      <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
+    <form onSubmit={handleSubmit}>
+      <h2>Login</h2>
+      <input
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="Email"
+      />
+      <input
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        placeholder="Password"
+      />
       <button type="submit">Login</button>
     </form>
   );

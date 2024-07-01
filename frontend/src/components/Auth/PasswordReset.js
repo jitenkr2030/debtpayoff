@@ -1,32 +1,26 @@
 import React, { useState } from 'react';
-import { resetPassword } from '../../services/authService';
+import { useAuth } from '../../hooks/useAuth';
 
 const PasswordReset = () => {
   const [email, setEmail] = useState('');
-  const [resetSent, setResetSent] = useState(false);
+  const { resetPassword } = useAuth();
 
-  const handleReset = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      await resetPassword(email);
-      setResetSent(true);
-    } catch (error) {
-      console.error('Password reset failed', error);
-      // Handle password reset failure (e.g., show error message)
-    }
+    await resetPassword(email);
   };
 
   return (
-    <div>
-      {resetSent ? (
-        <p>Password reset email sent. Check your inbox.</p>
-      ) : (
-        <form onSubmit={handleReset}>
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
-          <button type="submit">Reset Password</button>
-        </form>
-      )}
-    </div>
+    <form onSubmit={handleSubmit}>
+      <h2>Password Reset</h2>
+      <input
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="Email"
+      />
+      <button type="submit">Reset Password</button>
+    </form>
   );
 };
 
