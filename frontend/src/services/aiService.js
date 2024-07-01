@@ -1,12 +1,12 @@
-// aiService.js
+// src/services/aiService.js
 
-// Example content (modify as per your project's requirements)
-const aiService = {
-    getRecommendations: () => {
-        // Implement AI logic here
-        return ['Recommendation 1', 'Recommendation 2'];
-    },
-    // Other AI service functions
-};
-
-export default aiService;
+// Example function definition
+export const getDynamicPlanAdjustments = () => {
+    // Function logic here
+  };
+  
+  // Other functions and exports
+  export const anotherFunction = () => {
+    // Function logic here
+  };
+  
