@@ -1,9 +1,9 @@
 // src/services/communityService.js
 
-// Function to get forum threads
-export const getForumThreads = () => {
+// Function to get posts
+export const getPosts = () => {
   // Example logic for the function
-  console.log("Getting forum threads...");
+  console.log("Getting posts...");
   // Return some data or perform an API call
 };
 
