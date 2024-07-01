@@ -1,11 +1,13 @@
 // src/services/communityService.js
 
-// Function to get social feed posts
-export const getSocialFeed = async () => {
-    // Placeholder logic for fetching social feed posts
-    return [
-      { id: 1, user: "User1", content: "Post content 1" },
-      { id: 2, user: "User2", content: "Post content 2" },
-    ];
-  };
-  
+// Function to get forum threads
+export const getForumThreads = () => {
+  // Example logic for the function
+  console.log("Getting forum threads...");
+  // Return some data or perform an API call
+};
+
+// Export other functions if needed
+export const anotherFunction = () => {
+  // Function logic here
+};
