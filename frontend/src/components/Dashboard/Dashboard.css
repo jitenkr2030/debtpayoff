@@ -1,0 +1,73 @@
+/* src/components/Dashboard/Dashboard.css */
+
+.dashboard-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.dashboard-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.dashboard-title {
+  font-size: 2em;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.dashboard-subtitle {
+  font-size: 1.2em;
+  color: #666;
+}
+
+.dashboard-overview {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.dashboard-card {
+  flex: 1;
+  padding: 20px;
+  margin: 0 10px;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.dashboard-charts {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.chart-card {
+  flex: 1;
+  padding: 20px;
+  margin: 0 10px;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.dashboard-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.dashboard-action-btn {
+  padding: 10px 20px;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.dashboard-action-btn:hover {
+  background: #0056b3;
+}
